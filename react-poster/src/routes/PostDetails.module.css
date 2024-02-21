@@ -1,0 +1,24 @@
+.details {
+	width: 30rem;
+	padding: 1rem;
+}
+
+.author {
+	margin: 0;
+	color: #543280;
+	font-size: 0.8rem;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.text {
+	margin: 0.25rem 0 0 0;
+	font-style: italic;
+	color: #593884;
+	font-size: 1.25rem;
+	white-space: pre-wrap;
+}
+
+.details a {
+	text-decoration: none;
+}
