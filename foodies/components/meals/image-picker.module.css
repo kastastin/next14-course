@@ -1,0 +1,45 @@
+.controls {
+	display: flex;
+	align-items: flex-start;
+	gap: 1.5rem;
+	margin-bottom: 1rem;
+}
+
+.picker .input {
+	display: none;
+}
+
+.picker .button {
+	padding: 0.5rem 1.5rem;
+	border: 0;
+	border-radius: 2px;
+	background: #a4abb9;
+	font: inherit;
+	cursor: pointer;
+}
+
+.picker .button:hover,
+.picker .button:focus {
+	background: #b3b9c6;
+}
+
+.preview {
+	width: 10rem;
+	height: 10rem;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2px solid #a4abb9;
+	color: #a4abb9;
+	text-align: center;
+}
+
+.preview p {
+	margin: 0;
+	padding: 1rem;
+}
+
+.preview img {
+	object-fit: cover;
+}
