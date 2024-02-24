@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { saveMeal } from "./meals";
 
-export async function shareMeal(formData) {
+export async function shareMeal(prevState, formData) {
 	const meal = {
 		title: formData.get("title"),
 		summary: formData.get("summary"),
@@ -13,6 +13,27 @@ export async function shareMeal(formData) {
 		creator_email: formData.get("email"),
 	};
 
-  await saveMeal(meal);
-  redirect("/meals");
+	if (
+		isTextValid(
+			meal.title,
+			meal.summary,
+			meal.instructions,
+			meal.creator,
+			meal.creator_email
+		) ||
+		!meal.image ||
+		meal.image.size === 0 ||
+		!meal.creator_email.includes("@")
+	) {
+		return {
+			message: "Invalid input! Please check your input and try again.",
+		};
+	}
+
+	await saveMeal(meal);
+	redirect("/meals");
+}
+
+function isTextValid(...texts) {
+	return texts.some((text) => !text || text.trim() === "");
 }
