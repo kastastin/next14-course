@@ -7,7 +7,7 @@ import classes from "./page.module.css";
 
 async function Meals() {
 	const meals = await getMeals();
-
+	
 	return <MealsGrid meals={meals} />;
 }
 
