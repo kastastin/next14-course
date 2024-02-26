@@ -2,10 +2,18 @@ import Link from "next/link";
 
 import classes from "./button.module.css";
 
-export default function Button({ link, children }) {
+export default function Button({ link, onClick, children }) {
+	if (link) {
+		return (
+			<Link href={link} className={classes.btn}>
+				{children}
+			</Link>
+		);
+	}
+
 	return (
-		<Link href={link} className={classes.btn}>
+		<button onClick={onClick} className={classes.btn}>
 			{children}
-		</Link>
+		</button>
 	);
 }
