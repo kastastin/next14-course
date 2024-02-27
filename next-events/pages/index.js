@@ -2,8 +2,9 @@ import Head from "next/head";
 
 import { getFeaturedEvents } from "../helpers/api-util";
 import EventList from "../components/events/event-list";
+import NewsletterRegistration from "../components/input/newsletter-registration";
 
-export default function HomePaga(props) {
+export default function HomePaga({ events }) {
 	return (
 		<div>
 			<Head>
@@ -13,8 +14,9 @@ export default function HomePaga(props) {
 					content="Find a lot of great events that allow you to evolve..."
 				/>
 			</Head>
-			
-			<EventList items={props.events} />
+
+			<NewsletterRegistration />
+			<EventList items={events} />
 		</div>
 	);
 }
