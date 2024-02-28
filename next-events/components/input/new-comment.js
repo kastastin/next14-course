@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 
 import classes from "./new-comment.module.css";
 
-export default function NewComment(props) {
+export default function NewComment({ onAddComment }) {
 	const [isInvalid, setIsInvalid] = useState(false);
 
 	const emailInputRef = useRef();
@@ -29,7 +29,7 @@ export default function NewComment(props) {
 			return;
 		}
 
-		props.onAddComment({
+		onAddComment({
 			email: enteredEmail,
 			name: enteredName,
 			text: enteredComment,
@@ -37,7 +37,7 @@ export default function NewComment(props) {
 	}
 
 	return (
-		<form className={classes.form}>
+		<form className={classes.form} onSubmit={sendCommentHandler}>
 			<div className={classes.row}>
 				<div className={classes.control}>
 					<label htmlFor="email">Your email</label>
