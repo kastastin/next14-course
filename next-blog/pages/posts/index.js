@@ -1,40 +1,16 @@
+import { getAllPosts } from "../../lib/posts-util";
 import AllPosts from "../../components/posts/all-posts";
 
-const DUMMY_POSTS = [
-	{
-		title: "Getting Started with Next.js",
-		slug: "getting-started-with-nextjs",
-		image: "getting-started-nextjs.png",
-		date: "2024-02-10",
-		excerpt:
-			"Next.js is a popular and lightweight framework for static and server-rendered applications.",
-	},
-	{
-		title: "Getting Started with Next.js2",
-		slug: "getting-started-with-nextjs2",
-		image: "getting-started-nextjs.png",
-		date: "2024-02-10",
-		excerpt:
-			"Next.js is a popular and lightweight framework for static and server-rendered applications.",
-	},
-	{
-		title: "Getting Started with Next.js3",
-		slug: "getting-started-with-nextjs3",
-		image: "getting-started-nextjs.png",
-		date: "2024-02-10",
-		excerpt:
-			"Next.js is a popular and lightweight framework for static and server-rendered applications.",
-	},
-	{
-		title: "Getting Started with Next.js4",
-		slug: "getting-started-with-nextjs4",
-		image: "getting-started-nextjs.png",
-		date: "2024-02-10",
-		excerpt:
-			"Next.js is a popular and lightweight framework for static and server-rendered applications.",
-	},
-];
+export default function AllPostsPage({ posts }) {
+	return <AllPosts posts={posts} />;
+}
 
-export default function AllPostsPage() {
-	return <AllPosts posts={DUMMY_POSTS} />;
+export function getStaticProps() {
+	const allPosts = getAllPosts();
+
+	return {
+		props: {
+			posts: allPosts,
+		},
+	};
 }

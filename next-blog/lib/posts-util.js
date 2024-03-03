@@ -27,12 +27,10 @@ export function getFeaturedPosts() {
 }
 
 function getPostData(postIdentifier) {
+	const postSlug = postIdentifier.replace(/\.md$/, ""); // Removes the file extension
 	const filePath = path.join(postsDirectory, `${postSlug}.md`);
 	const fileContent = fs.readFileSync(filePath, "utf-8");
 	const { data, content } = matter(fileContent);
-
-	// Removes the file extension
-	const postSlug = postIdentifier.replace(/\.md$/, "");
 
 	const postData = {
 		slug: postSlug,
@@ -42,5 +40,3 @@ function getPostData(postIdentifier) {
 
 	return postData;
 }
-
-// Adding Functions To Read & Fetch Data From Markdown Files
