@@ -1,5 +1,6 @@
-import { useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
+import Notification from "../ui/notification";
 import classes from "./contact-form.module.css";
 
 export default function ContactForm() {
@@ -7,24 +8,66 @@ export default function ContactForm() {
 	const nameInputRef = useRef();
 	const messageInputRef = useRef();
 
-	function sendMessageHandler(e) {
+	const [requestStatus, setRequestStatus] = useState(); // success, error, pending
+	const [requestError, setRequestError] = useState();
+
+	useEffect(() => {
+		if (requestStatus === "success" || requestStatus === "error") {
+			const timer = setTimeout(() => {
+				setRequestStatus(null);
+				setRequestError(null);
+			}, 3000);
+
+			return () => clearTimeout(timer);
+		}
+	}, [requestStatus]);
+
+	async function sendMessageHandler(e) {
 		e.preventDefault();
 
 		const currentEmail = emailInputRef.current.value;
 		const currentName = emailInputRef.current.value;
 		const currentMessage = emailInputRef.current.value;
 
-		fetch("/api/contact", {
-			method: "POST",
-			body: JSON.stringify({
+		setRequestStatus("pending");
+
+		try {
+			await sendContactData({
 				email: currentEmail,
 				name: currentName,
 				message: currentMessage,
-			}),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
+			});
+			setRequestStatus("success");
+		} catch (error) {
+			setRequestError(error.message);
+			setRequestStatus("error");
+		}
+	}
+
+	let notificationData;
+
+	if (requestStatus === "pending") {
+		notificationData = {
+			status: "pending",
+			title: "Sending message...",
+			message: "Your message is on its way!",
+		};
+	}
+
+	if (requestStatus === "success") {
+		notificationData = {
+			status: "success",
+			title: "Success!",
+			message: "Message sent successfully!",
+		};
+	}
+
+	if (requestStatus === "error") {
+		notificationData = {
+			status: "error",
+			title: "Error!",
+			message: requestError,
+		};
 	}
 
 	return (
@@ -58,6 +101,24 @@ export default function ContactForm() {
 					<button>Send Message</button>
 				</div>
 			</form>
+
+			{notificationData && <Notification {...notificationData} />}
 		</section>
 	);
+}
+
+async function sendContactData(contactDetails) {
+	const response = await fetch("/api/contact", {
+		method: "POST",
+		body: JSON.stringify(contactDetails),
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+
+	const data = await response.json();
+
+	if (!response.ok) {
+		throw new Error(data.message || "Something went wrong!");
+	}
 }
