@@ -1,7 +1,7 @@
 .newsletter {
-	margin: 3rem auto;
 	width: 90%;
 	max-width: 20rem;
+	margin: 3rem auto;
 }
 
 .newsletter h2 {
@@ -9,22 +9,22 @@
 }
 
 .control input {
-	font: inherit;
 	padding: 0.25rem;
+	border: 1px solid #ccc;
 	border-radius: 4px;
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
-	border: 1px solid #ccc;
+	font: inherit;
 }
 
 .newsletter button {
-	background-color: #03be9f;
 	border: 1px solid #03be9f;
 	border-radius: 6px;
-	color: #dafff7;
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
+	background-color: #03be9f;
 	font: inherit;
+	color: #dafff7;
 	cursor: pointer;
 }
 

@@ -1,25 +1,25 @@
 .logistics {
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-	border-radius: 6px;
-	background-color: #2b2b2b;
-	padding: 2rem;
-	max-width: 50rem;
 	width: 80%;
-	margin: -3rem auto;
-	color: #d5eeeb;
+	max-width: 50rem;
 	display: flex;
-	justify-content: space-between;
-	gap: 1rem;
 	flex-direction: column;
+	justify-content: space-between;
 	align-items: center;
+	gap: 1rem;
+	margin: -3rem auto;
+	padding: 2rem;
+	border-radius: 6px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	background-color: #2b2b2b;
+	color: #d5eeeb;
 }
 
 .image {
 	width: 10rem;
 	height: 10rem;
+	border: 5px solid white;
 	border-radius: 50%;
 	overflow: hidden;
-	border: 5px solid white;
 }
 
 .image img {
@@ -31,10 +31,10 @@
 .list {
 	flex: 3;
 	display: flex;
-	gap: 2rem;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	flex-direction: column;
+	gap: 2rem;
 }
 
 .logistics address {
@@ -43,11 +43,11 @@
 
 @media (min-width: 768px) {
 	.logistics {
-		padding: 2rem;
-		margin: -5rem auto;
-		gap: 3rem;
 		flex-direction: row;
 		align-items: stretch;
+		gap: 3rem;
+		margin: -5rem auto;
+		padding: 2rem;
 	}
 
 	.image {
