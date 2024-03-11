@@ -1,10 +1,13 @@
 import { useState, useRef } from "react";
 import { signIn } from "next-auth/client";
+import { useRouter } from "next/router";
 
 import classes from "./auth-form.module.css";
 
 export default function AuthForm() {
+	const router = useRouter();
 	const [isLogin, setIsLogin] = useState(true);
+
 	const emailInputRef = useRef();
 	const passwordInputRef = useRef();
 
@@ -26,7 +29,7 @@ export default function AuthForm() {
 			});
 
 			if (!result.error) {
-				console.log(result);
+				router.replace("/profile");
 			}
 		} else {
 			try {
