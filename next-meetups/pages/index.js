@@ -1,25 +1,8 @@
+import { MongoClient } from "mongodb";
+
 import MeetupList from "../components/meetups/MeetupList";
 
-const DUMMY_MEETUPS = [
-	{
-		id: "m1",
-		title: "A First Meetup",
-		image:
-			"https://images.unsplash.com/photo-1546195643-70f48f9c5b87?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGxvY2FsJTIwcGxhY2V8ZW58MHx8MHx8fDA%3D",
-		address: "Some address 5, 12345 Some City",
-		description: "This is a first meetup!",
-	},
-	{
-		id: "m2",
-		title: "A Second Meetup",
-		image:
-			"https://images.unsplash.com/photo-1634120663136-72dffeafa209?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fGxvY2FsJTIwcGxhY2V8ZW58MHx8MHx8fDA%3D",
-		address: "Random address 12, 78320 Random City",
-		description: "This is a second meetup!",
-	},
-];
-
-export default function HomePage({ meetups: loadedMeetups}) {
+export default function HomePage({ meetups: loadedMeetups }) {
 	return (
 		<div>
 			<MeetupList meetups={loadedMeetups} />
@@ -28,9 +11,23 @@ export default function HomePage({ meetups: loadedMeetups}) {
 }
 
 export async function getStaticProps() {
+	const client = await MongoClient.connect(
+		"mongodb+srv://kastastin:prostopass@cluster0.mrme6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+	);
+	const db = client.db("next-meetups");
+	const meetupsCollection = db.collection("meetups");
+	const meetups = await meetupsCollection.find().toArray();
+
+	client.close();
+
 	return {
 		props: {
-			meetups: DUMMY_MEETUPS,
+			meetups: meetups.map((meetup) => ({
+				id: meetup._id.toString(),
+				title: meetup.title,
+				image: meetup.image,
+				address: meetup.address,
+			})),
 		},
 		revalidate: 10,
 	};
