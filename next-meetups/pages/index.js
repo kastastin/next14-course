@@ -19,10 +19,19 @@ const DUMMY_MEETUPS = [
 	},
 ];
 
-export default function HomePage() {
+export default function HomePage({ meetups: loadedMeetups}) {
 	return (
 		<div>
-			<MeetupList meetups={DUMMY_MEETUPS} />
+			<MeetupList meetups={loadedMeetups} />
 		</div>
 	);
+}
+
+export async function getStaticProps() {
+	return {
+		props: {
+			meetups: DUMMY_MEETUPS,
+		},
+		revalidate: 10,
+	};
 }
