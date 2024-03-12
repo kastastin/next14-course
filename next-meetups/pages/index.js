@@ -1,12 +1,21 @@
+import Head from "next/head";
 import { MongoClient } from "mongodb";
 
 import MeetupList from "../components/meetups/MeetupList";
 
 export default function HomePage({ meetups: loadedMeetups }) {
 	return (
-		<div>
+		<>
+			<Head>
+				<title>Next Meetups</title>
+				<meta
+					name="description"
+					content="Browse a huge list of highly active React meetups!"
+				/>
+			</Head>
+
 			<MeetupList meetups={loadedMeetups} />
-		</div>
+		</>
 	);
 }
 

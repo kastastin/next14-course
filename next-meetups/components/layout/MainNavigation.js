@@ -6,7 +6,7 @@ export default function MainNavigation() {
 	return (
 		<header className={classes.header}>
 			<Link href="/">
-				<div className={classes.logo}>React Meetups</div>
+				<div className={classes.logo}>Next Meetups</div>
 			</Link>
 
 			<nav>
